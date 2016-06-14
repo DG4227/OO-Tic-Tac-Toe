@@ -14,20 +14,6 @@ class Board
 		[2, 4, 6]
 	]
 
-	# def current_combos(array)
-	# 	signs = ["X", "O"]
-
-	# 	signs.each_with_object([]) do |sign|
-	# 		array.each_with_index |mark, idx|
-	# 			x_array = []
-	# 			if array[idx] == sign 
-	# 				x_array << array[idx]
-	# 			end
-	# 			x_array
-	# 		end
-	# 	end
-	# end
-
 	def winning(array)
 		x_array = []
 		o_array = []
