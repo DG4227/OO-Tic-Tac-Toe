@@ -13,26 +13,27 @@ class Game
 		@computermark = "O"
 		@current_player = nil 
 		#Welcoming the user - if they enter a name that exists, we will tell them to take another(?)
+		self.welcome
+		self.mark_select
+	end
+
+	def welcome
 		puts "Welcome to Tic Tac Toe! Please enter player name: "
-		#grabbing input 
 		playername = gets.chomp
 		@player1 = Player.players.find {|player| player.name == playername}
-		if @player1 == nil
-			@player1 = Player.new(playername)
-		else
-			puts "Welcome back, #{player1.name}! Your record is #{player1.record[0]} wins, #{player1.record[1]} losses, and #{player1.record[2]} draw(s)."
+		if @player1 == nil then	@player1 = Player.new(playername)
+		else puts "Welcome back, #{player1.name}! Your record is #{player1.record[0]} wins, #{player1.record[1]} losses, and #{player1.record[2]} draw(s)."
 		end
-		self.mark_select
 	end
 
 	def mark_select
 		puts "Please select X or O"
-		@player1.mark = gets.chomp
-		if @player1.mark == "X" 
+		player1.mark = gets.chomp
+		if player1.mark == "X" 
 			self.computermark = "O" 
 			@current_player = :human
 		elsif
-			@player1.mark == "O"
+			player1.mark == "O"
 			self.computermark = "X"
 			@current_player = :computer
 		else
@@ -58,16 +59,13 @@ class Game
 	end
 
 	def computer_move
-		move = [computermark]
 		possible_moves = []
 		self.board.board_spots.each_with_index do |sign, idx|
-			if sign == " "
+			if sign == ' '  #or board.valid_move?(idx)
 				possible_moves << idx
 			end
 		end
-		move << possible_moves.sample
-		move
-
+		move = [computermark, possible_moves.sample]
 	end
 
 	def turn(array) #current_move

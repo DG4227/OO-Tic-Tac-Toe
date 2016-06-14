@@ -17,28 +17,19 @@ class Board
 	def winning(array)
 		mark_arrays(array).each do |marks|	
 			WIN_COMBOS.each do |combo|
-				if combo.all?{|num| marks.include?(num)}
-					return true
-				else
-					next
-				end
+				if combo.all?{|num| marks.include?(num)} then return true end
 			end
 		end
-		false
 	end
 
 	def mark_arrays(array)
-		x_array = []
-		o_array = []
-
+		mark_arrays = [[],[]]  # <--hoot! hoot!
 		array.each_with_index do |mark, idx|
-			if mark == "X" 
-				x_array << idx
-			elsif mark == "O"
-				o_array << idx
+			if mark == "X" then mark_arrays[0] << idx
+			elsif mark == "O" then mark_arrays[1] << idx 
 			end
 		end
-		mark_arrays = [x_array, o_array]
+		mark_arrays
 	end
 
 	def full?(array)
@@ -55,14 +46,23 @@ class Board
 
 		#board display 
 
-	    @board = " #{@board_spots[0]} | #{@board_spots[1]} | #{@board_spots[2]}
+	  @board = " #{@board_spots[0]} | #{@board_spots[1]} | #{@board_spots[2]}
 ------------
  #{@board_spots[3]} | #{@board_spots[4]} | #{@board_spots[5]}
 ------------
  #{@board_spots[6]} | #{@board_spots[7]} | #{@board_spots[8]} "
-
-		self.display_board
+ 		board_coordinates
 	end
+
+	def board_coordinates
+		puts "These are the board coordinates:"
+ 		board_coords = " 1 | 2 | 3
+------------
+ 4 | 5 | 6
+------------
+ 7 | 8 | 9 "
+ 		puts board_coords
+ 	end
 
 	def reset_board
 		@board = " #{@board_spots[0]} | #{@board_spots[1]} | #{@board_spots[2]}
@@ -79,8 +79,6 @@ class Board
 	def valid_move?(square)
 		if self.board_spots[square] == " "
 			true
-		else
-			false
 		end
 	end
 
