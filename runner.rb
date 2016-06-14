@@ -37,13 +37,8 @@ def play
     tictactoe.board.full?(tictactoe.board.board_spots)
   end
   wincrement(tictactoe)
-  binding.pry
   playagain?
 end
 
 play
 
-
-
-
-Pry.start

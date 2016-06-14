@@ -59,11 +59,13 @@ class Game
 
 	def computer_move
 		move = [computermark]
+		possible_moves = []
 		self.board.board_spots.each_with_index do |sign, idx|
 			if sign == " "
-				move << idx
+				possible_moves << idx
 			end
 		end
+		move << possible_moves.sample
 		move
 
 	end
@@ -86,17 +88,3 @@ class Game
 		end
 	end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
