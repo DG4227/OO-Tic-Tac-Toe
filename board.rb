@@ -37,6 +37,7 @@ class Board
 				end
 			end
 		end
+		false
 	end
 
 	def full?(array)
@@ -71,7 +72,7 @@ class Board
 	end
 
 	def display_board
-		puts @board
+		puts "\n" + @board + "\n"
 	end
 
 	def valid_move?(square)

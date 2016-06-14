@@ -1,6 +1,6 @@
 class Player
 
-	attr_accessor :mark
+	attr_accessor :mark, :record
 	attr_reader :name
 
 	@@players = []
@@ -10,25 +10,22 @@ class Player
 	end
 
 	def initialize(name)
-
-		if Player.players.find {|player| player.name == name}
-			player  
-		else
-			@name = name
-			Player.players << self
-			self
-		end
-	
+		@name = name
+		@record = [0, 0, 0]	
 		@mark = nil
-		@record = [0, 0]
+		Player.players << self
 	end
 
 	def move
 		#Remember to see if square is occupied
 		puts "Please enter a valid move (1 - 9): "
 		move = gets.chomp.to_i - 1
-		puts move.class
 		[@mark, move]
 	end	
+
+	def display_record
+		record = @record
+	end
+
 
 end

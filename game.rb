@@ -4,32 +4,42 @@ require 'pry'
 
 class Game
 
-	attr_accessor :computermark, :board, :current_player
+	attr_accessor :computermark, :board, :current_player, :player1
 
 
 	def initialize
 		#Generating a new board
 		@board = Board.new
 		@computermark = "O"
-		@current_player = :computer 
+		@current_player = nil 
 		#Welcoming the user - if they enter a name that exists, we will tell them to take another(?)
 		puts "Welcome to Tic Tac Toe! Please enter player name: "
 		#grabbing input 
 		playername = gets.chomp
-		@player1 = Player.new(playername)
-		
-		#pick your mark
+		@player1 = Player.players.find {|player| player.name == playername}
+		if @player1 == nil
+			@player1 = Player.new(playername)
+		else
+			puts "Welcome back, #{player1.name}! Your record is #{player1.record[0]} wins, #{player1.record[1]} losses, and #{player1.record[2]} draw(s)."
+		end
+		self.mark_select
+	end
+
+	def mark_select
 		puts "Please select X or O"
 		@player1.mark = gets.chomp
 		if @player1.mark == "X" 
 			self.computermark = "O" 
 			@current_player = :human
+		elsif
+			@player1.mark == "O"
+			self.computermark = "X"
+			@current_player = :computer
 		else
-			self.computermark = "X" 
+			self.mark_select
 		end
-		
-
 	end
+
 
 	def switch_player
 		if @current_player == :human
@@ -62,12 +72,31 @@ class Game
 		#Remember to see if square is occupied
 		if board.valid_move?(array[1]) == true 
 			board.place_mark(array)
+			self.switch_player
 		else
 			self.turn(self.current_move)
 		end	
-
-		self.switch_player
 	end	
+
+	def winner
+		if current_player == :computer
+			:human
+		else
+			:computer
+		end
+	end
 end
 
-Pry.start
+
+
+
+
+
+
+
+
+
+
+
+
+
