@@ -15,6 +15,19 @@ class Board
 	]
 
 	def winning(array)
+		mark_arrays(array).each do |marks|	
+			WIN_COMBOS.each do |combo|
+				if combo.all?{|num| marks.include?(num)}
+					return true
+				else
+					next
+				end
+			end
+		end
+		false
+	end
+
+	def mark_arrays(array)
 		x_array = []
 		o_array = []
 
@@ -25,19 +38,7 @@ class Board
 				o_array << idx
 			end
 		end
-
 		mark_arrays = [x_array, o_array]
-
-		mark_arrays.each do |marks|	
-			WIN_COMBOS.each do |combo|
-				if combo.all?{|num| marks.include?(num)}
-					return true
-				else
-					next
-				end
-			end
-		end
-		false
 	end
 
 	def full?(array)
