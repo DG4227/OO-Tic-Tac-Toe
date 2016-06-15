@@ -20,10 +20,7 @@ class Game
 	def welcome
 		puts "Welcome to Tic Tac Toe! Please enter player name: "
 		playername = gets.chomp
-		@player1 = Player.players.find {|player| player.name == playername}
-		if @player1 == nil then	@player1 = Player.new(playername)
-		else puts "Welcome back, #{player1.name}! Your record is #{player1.record[0]} wins, #{player1.record[1]} losses, and #{player1.record[2]} draw(s)."
-		end
+		@player1 = Player.find_or_create_player(playername)
 	end
 
 	def mark_select
